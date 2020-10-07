@@ -1,0 +1,26 @@
+version: '3.4'
+x-db-variables:  &db-variables
+  MYSQL_DATABASE: 'cms'
+  MYSQL_USER: 'cms-user'
+  MYSQL_PASSWORD: 'password'
+services:
+  cms:
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: mysql
+      <<: *db-variables
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:8.0.20
+    volumes:
+      - group2-cms-db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      <<: *db-variables
+      MYSQL_ROOT_PASSWORD: 'password'
+volumes:
+  group2-cms-db:
