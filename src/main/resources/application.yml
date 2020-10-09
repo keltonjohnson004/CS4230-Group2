@@ -9,7 +9,8 @@ spring:
     platform: mysql
     flyway:
       baseline-on-migrate: true
-      schemas: cs4230
+      schemas: cms
       user: ${spring.datasource.username}
       url: ${spring.datasource.url}
-
+contact:
+  defaultName: "Kelton"
