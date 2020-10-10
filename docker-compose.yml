@@ -1,32 +1,28 @@
 version: '3.4'
-x-db-variables:  &db-variables
-  MYSQL_DATABASE: 'cms'
-  MYSQL_USER: 'cms-user'
-  MYSQL_PASSWORD: 'password'
 services:
   cms:
     build: .
+    container_name: cms
     ports:
       - 8080:8080
     environment:
-      <<: *db-variables
-    networks:
-      - spring-boot-mysql-network-group2
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/cms?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true
+      SPRING_DATASOURCE_USERNAME: 'cms-user'
+      SPRING_DATASOURCE_PASSWORD: 'password'
+      SPRING_PROFILES_ACTIVE: 'prod'
     depends_on:
-      - mysql
-  mysql:
+      - db
+  db:
     image: mysql:8.0.20
+    container_name: db
     volumes:
       - group2-cms-db:/var/lib/mysql
     ports:
       - 3307:3306
     environment:
-      <<: *db-variables
+      MYSQL_DATABASE: 'cms'
+      MYSQL_USER: 'cms-user'
+      MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
-    networks:
-      - spring-boot-mysql-network-group2
 volumes:
   group2-cms-db:
-networks:
-  spring-boot-mysql-network-group2:
-    driver: bridge

@@ -1,8 +1,9 @@
+
 spring:
   application:
     name: Group 2 CMS
   datasource:
-    url: jdbc:mysql://localhost:3306/cms
+    url: jdbc:mysql://localhost:3306/cms?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: cms-user
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -11,6 +12,7 @@ spring:
       baseline-on-migrate: true
       schemas: cms
       user: ${spring.datasource.username}
+      password: ${spring.datasource.password}
       url: ${spring.datasource.url}
 contact:
   defaultName: "Kelton"
