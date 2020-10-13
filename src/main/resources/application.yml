@@ -14,5 +14,8 @@ spring:
       user: ${spring.datasource.username}
       password: ${spring.datasource.password}
       url: ${spring.datasource.url}
-contact:
-  defaultName: "Kelton"
+security:
+  jwt:
+    token:
+      secret-key: AScaklasdAS*(@#$!
+      ttl: 30m
