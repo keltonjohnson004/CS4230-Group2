@@ -9,11 +9,28 @@
 </head>
 <body>
 	<main>
-		<form>
-			<label>First Name</label> <input>
-			<label>Last Name</label> <input>
-			<label>Username</label> <input>
-			<label>Password</label> <input>
+		<form method="post">
+			<table>
+				<tr>
+					<label>First Name</label> <input type="text" name="FirstName">
+					<div hidden="true">Invalid First Name</div><br>
+				</tr>
+				<tr>
+					<label>Last Name</label> <input type="text" name="LastName">
+					<div hidden="true">Invalid Last Name</div><br>
+				</tr>
+				<tr>
+					<label>Username</label> <input type="text" name="UserName">
+					 <div hidden="true">Invalid Username</div> <br>
+				</tr>
+				<tr>
+					<label>Password</label> <input type="password" name="Password">
+					<div hidden="true">Invalid Password</div><br>
+				</tr>
+				<tr>
+					<input type="submit">
+				</tr>
+			</table>
 		</form>
 	</main>
 </body>

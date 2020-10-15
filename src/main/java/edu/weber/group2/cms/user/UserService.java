@@ -14,11 +14,18 @@ public class UserService implements UserDetailsService
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
+
+
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder)
     {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+
+    public void addUser(User user)
+    {
+        userRepository.addUser(user);
     }
 
 

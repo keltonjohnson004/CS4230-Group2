@@ -1,6 +1,8 @@
 package edu.weber.group2.cms.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.NonNullFields;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,7 +11,6 @@ import java.security.Permissions;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
-
 public class User implements UserDetails {
     private int Id;
     private String FirstName;

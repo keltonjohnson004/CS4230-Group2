@@ -7,7 +7,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import javax.print.DocFlavor;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserRepository {
     private static final String USER_ID_KEY = "id";
@@ -62,9 +64,41 @@ public class UserRepository {
             + "LEFT JOIN Permission p ON p.ID = rp.PermissionID"
             + "WHERE 1=1";
 
+
+
+
     private static final String WHERE_USERNAME_EQUALS_USERNAME = "u.UserName = " + USERNAME_BINDING_KEY ;
 
+
+    private static final String USER_INSERT = "INSERT INTO UserInfo("
+            +"FirstName,"
+            +"LastName,"
+            +"UserName,"
+            +"Password,"
+            +"Locked,"
+            +"Enabled,"
+            +"CredentialExpiredOn,"
+            +"ExpiredOn,"
+            +"CreatedOn,"
+            +"ModifiedOn"
+            +")VALUES("
+            +":FirstName,"
+            +":LastName,"
+            +":UserName,"
+            +":Password,"
+            +":Locked,"
+            +":Enabled,"
+            +":CredentialExpiredOn,"
+            +":ExpiredOn,"
+            +":CreatedOn,"
+            +":ModifiedOn)";
+
     private final NamedParameterJdbcTemplate jdbcTemplate;
+
+    public UserRepository(NamedParameterJdbcTemplate jdbcTemplate)
+    {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public User getUserByUserName(String username)
     {
@@ -76,10 +110,21 @@ public class UserRepository {
         return callbackHandler.getUser();
     }
 
-    @Autowired
-    public UserRepository(NamedParameterJdbcTemplate jdbcTemplate)
+
+    public void addUser(User user)
     {
-        this.jdbcTemplate = jdbcTemplate;
+        Map<String,Object> parameters = new HashMap();
+        parameters.put("FirstName", user.getFirstName());
+        parameters.put("LastName", user.getLastName());
+        parameters.put("UserName", user.getUsername());
+        parameters.put("Password", user.getPassword());
+        parameters.put("Locked", user.isLocked());
+        parameters.put("Enabled", user.isEnabled());
+        parameters.put("CredentialExpiredOn", user.getCredentialExpiredOn());
+        parameters.put("ExpiredOn", user.getExpiredOn());
+        parameters.put("CreatedOn", user.getCreatedOn());
+        parameters.put("ModifiedOn", user.getModifiedOn());
+        jdbcTemplate.update(USER_INSERT, parameters);
     }
 
 
