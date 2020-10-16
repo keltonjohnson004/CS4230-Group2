@@ -56,12 +56,12 @@ public class UserRepository {
             + "r.ID as RoleID,"
             + "r.RoleName,"
             + "p.ID as PermissionID,"
-            + "p.PermissionName"
-            + "FROM UserInfo u"
-            + "LEFT JOIN UserToRole ur ON ur.UserID = u.ID"
-            + "LEFT JOIN ROLE r on ur.RoleID = r.ID"
-            + "LEFT JOIN RoleToPermission rp ON r.ID = rp.RoleID"
-            + "LEFT JOIN Permission p ON p.ID = rp.PermissionID"
+            + "p.PermissionName "
+            + "FROM UserInfo u "
+            + "LEFT JOIN UserToRole ur ON ur.UserID = u.ID "
+            + "LEFT JOIN Role r on ur.RoleID = r.ID "
+            + "LEFT JOIN RoleToPermission rp ON r.ID = rp.RoleID "
+            + "LEFT JOIN Permission p ON p.ID = rp.PermissionID "
             + "WHERE 1=1";
 
 
@@ -120,10 +120,10 @@ public class UserRepository {
         parameters.put("Password", user.getPassword());
         parameters.put("Locked", user.isLocked());
         parameters.put("Enabled", user.isEnabled());
-        parameters.put("CredentialExpiredOn", user.getCredentialExpiredOn());
-        parameters.put("ExpiredOn", user.getExpiredOn());
-        parameters.put("CreatedOn", user.getCreatedOn());
-        parameters.put("ModifiedOn", user.getModifiedOn());
+        parameters.put("CredentialExpiredOn", user.getCredentialExpiredOn().toLocalDateTime());
+        parameters.put("ExpiredOn", user.getExpiredOn().toLocalDateTime());
+        parameters.put("CreatedOn", user.getCreatedOn().toLocalDateTime());
+        parameters.put("ModifiedOn", user.getModifiedOn().toLocalDateTime());
         jdbcTemplate.update(USER_INSERT, parameters);
     }
 
