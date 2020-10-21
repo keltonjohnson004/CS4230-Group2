@@ -3,6 +3,7 @@ INSERT INTO UserToRole (UserID, RoleID) values (2,3);
 INSERT INTO UserToRole (UserID, RoleID) values (3,2);
 INSERT INTO UserToRole (UserID, RoleID) values (4,4);
 INSERT INTO UserToRole (UserID, RoleID) values (5,5);
+INSERT INTO UserToRole (UserID, RoleID) values (6,6);
 
 INSERT INTO roletopermission (PermissionID, RoleID) values (1,1);
 INSERT INTO roletopermission (PermissionID, RoleID) values (1,3);
