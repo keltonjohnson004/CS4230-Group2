@@ -3,6 +3,7 @@ package edu.weber.group2.cms.user;
 import edu.weber.group2.cms.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.security.Principal;
 import java.time.ZonedDateTime;
 
 @Controller
@@ -45,6 +47,7 @@ public class UserController {
     @RequestMapping(value="login", method=RequestMethod.POST)
     public String postLoginPage(Model model)
     {
+        model.addAttribute("user", new User());
         return "user/register";
     }
 
@@ -89,13 +92,18 @@ public class UserController {
             return "user/register";
         }
 
+        UserDetails test = userService.loadUserByUsername(user.getUserName());
+
+        if(test != null)
+        {
+            return "user/register";
+        }
+
 
         user.setEnabled(true);
         user.setLocked(false);
-        user.setExpiredOn(dateTime);
-        user.setCreatedOn(dateTime);
-        user.setCredentialExpiredOn(dateTime);
-        user.setModifiedOn(dateTime);
+        user.setExpiredOn(null);
+        user.setCredentialExpiredOn(null);
 
         userService.addUser(user);
 

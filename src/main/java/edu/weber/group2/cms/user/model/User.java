@@ -120,7 +120,12 @@ public class User implements UserDetails {
     }
 
 
-    public Map<Integer, Role> getRoles() {
+    public Map<Integer, Role> getRoles()
+    {
+        if(this.roles == null)
+        {
+            this.roles =  new HashMap<>();
+        }
         return roles;
     }
 

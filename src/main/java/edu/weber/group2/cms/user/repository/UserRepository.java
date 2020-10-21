@@ -78,9 +78,7 @@ public class UserRepository {
             +"Locked,"
             +"Enabled,"
             +"CredentialExpiredOn,"
-            +"ExpiredOn,"
-            +"CreatedOn,"
-            +"ModifiedOn"
+            +"ExpiredOn"
             +")VALUES("
             +":FirstName,"
             +":LastName,"
@@ -89,9 +87,7 @@ public class UserRepository {
             +":Locked,"
             +":Enabled,"
             +":CredentialExpiredOn,"
-            +":ExpiredOn,"
-            +":CreatedOn,"
-            +":ModifiedOn)";
+            +":ExpiredOn)";
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -120,10 +116,21 @@ public class UserRepository {
         parameters.put("Password", user.getPassword());
         parameters.put("Locked", user.isLocked());
         parameters.put("Enabled", user.isEnabled());
-        parameters.put("CredentialExpiredOn", user.getCredentialExpiredOn().toLocalDateTime());
-        parameters.put("ExpiredOn", user.getExpiredOn().toLocalDateTime());
-        parameters.put("CreatedOn", user.getCreatedOn().toLocalDateTime());
-        parameters.put("ModifiedOn", user.getModifiedOn().toLocalDateTime());
+        if(user.getCredentialExpiredOn() != null) {
+            parameters.put("CredentialExpiredOn", user.getCredentialExpiredOn().toLocalDateTime());
+        }
+        else
+        {
+            parameters.put("CredentialExpiredOn", null);
+        }
+        if(user.getCredentialExpiredOn() != null) {
+            parameters.put("ExpiredOn", user.getExpiredOn().toLocalDateTime());
+        }
+        else
+        {
+            parameters.put("ExpiredOn", null);
+        }
+
         jdbcTemplate.update(USER_INSERT, parameters);
     }
 

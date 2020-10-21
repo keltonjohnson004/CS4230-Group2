@@ -23,6 +23,10 @@ public class UserService implements UserDetailsService
     }
 
 
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
     public void addUser(User user)
     {
         userRepository.addUser(user);
@@ -32,10 +36,11 @@ public class UserService implements UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.getUserByUserName(username);
-        if(user == null)
-        {
-            throw new UsernameNotFoundException("User not found using username " + username);
-        }
+//        if(user == null)
+//        {
+//            throw new UsernameNotFoundException("User not found using username " + username);
+//        }
+
 
         return user;
     }

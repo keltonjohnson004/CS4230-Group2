@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
 
 public class UserRowCallbackHandler implements RowCallbackHandler
 {
@@ -58,7 +59,7 @@ public class UserRowCallbackHandler implements RowCallbackHandler
         }
         if(user.getCredentialExpiredOn() == null && !processedCredentialsExpired)
         {
-            user.setCredentialExpiredOn(createZonedDateTime(rs, "CredentialsExpireOn"));
+            user.setCredentialExpiredOn(createZonedDateTime(rs, "CredentialExpiredOn"));
             processedCredentialsExpired = true;
         }
         if(user.getExpiredOn() == null && !processedExpiredOn)
@@ -75,8 +76,10 @@ public class UserRowCallbackHandler implements RowCallbackHandler
             user.setExpiredOn(createZonedDateTime(rs,"ExpiredOn"));
         }
 
-        int roleID = rs.getInt("RoldID");
+        int roleID = rs.getInt("RoleID");
         int permissionID = rs.getInt("PermissionID");
+
+
         Role currentRole = user.getRoles().get(roleID);
 
         if(currentRole == null && roleID  != 0)
@@ -114,10 +117,6 @@ public class UserRowCallbackHandler implements RowCallbackHandler
     }
 
     public User getUser() {
-        if(user == null)
-        {
-            user = new User();
-        }
         return user;
     }
 
