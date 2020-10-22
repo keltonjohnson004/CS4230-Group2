@@ -31,11 +31,11 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
 
-    private JdbcTemplate jdbcTemplate;
-    public JdbcTemplate getJdbcTemplate()
-    {
-        return jdbcTemplate;
-    }
+ //   private JdbcTemplate jdbcTemplate;
+ //   public JdbcTemplate getJdbcTemplate()
+//    {
+ //       return jdbcTemplate;
+  //  }
 
     @RequestMapping(value="login", method= RequestMethod.GET)
     public String getLoginPage(Model model)

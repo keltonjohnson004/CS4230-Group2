@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--<html lang="en">-->
+<html xmlns:th="http://www.w3.org/1000/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <div>
+<!--        <select th:field="*{tagList}">-->
+<!--            <option value="0">select tag</option>-->
+<!--            <option th:each="${tagList}" th:value="${tagList.id}" th:text="${tagList.name}"/>-->
+<!--        </select>-->
+Hello
+        <div th:each="current : ${tagList}">
+           <div th:text="${current.id}"/>
+        </div>
+
+
+
+    </div>
+
+
+</main>
+</body>
+</html>
