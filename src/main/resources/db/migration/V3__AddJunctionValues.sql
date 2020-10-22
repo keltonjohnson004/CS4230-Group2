@@ -1,0 +1,26 @@
+INSERT INTO UserToRole (UserID, RoleID) values (1,1);
+INSERT INTO UserToRole (UserID, RoleID) values (2,3);
+INSERT INTO UserToRole (UserID, RoleID) values (3,2);
+INSERT INTO UserToRole (UserID, RoleID) values (4,4);
+INSERT INTO UserToRole (UserID, RoleID) values (5,5);
+INSERT INTO UserToRole (UserID, RoleID) values (6,6);
+
+INSERT INTO roletopermission (PermissionID, RoleID) values (1,1);
+INSERT INTO roletopermission (PermissionID, RoleID) values (1,3);
+INSERT INTO roletopermission (PermissionID, RoleID) values (1,5);
+INSERT INTO roletopermission (PermissionID, RoleID) values (2,6);
+INSERT INTO roletopermission (PermissionID, RoleID) values (2,5);
+INSERT INTO roletopermission (PermissionID, RoleID) values (3,1);
+INSERT INTO roletopermission (PermissionID, RoleID) values (3,2);
+INSERT INTO roletopermission (PermissionID, RoleID) values (3,3);
+INSERT INTO roletopermission (PermissionID, RoleID) values (3,4);
+INSERT INTO roletopermission (PermissionID, RoleID) values (3,5);
+INSERT INTO roletopermission (PermissionID, RoleID) values (4,3);
+INSERT INTO roletopermission (PermissionID, RoleID) values (4,4);
+INSERT INTO roletopermission (PermissionID, RoleID) values (4,5);
+INSERT INTO roletopermission (PermissionID, RoleID) values (5,5);
+INSERT INTO roletopermission (PermissionID, RoleID) values (6,5);
+INSERT INTO roletopermission (PermissionID, RoleID) values (7,5);
+INSERT INTO roletopermission (PermissionID, RoleID) values (1,6);
+INSERT INTO roletopermission (PermissionID, RoleID) values (3,6);
+INSERT INTO roletopermission (PermissionID, RoleID) values (4,6);
