@@ -100,6 +100,10 @@ public class UserController {
         }
 
 
+        //TODO loadUserByUsername to check if username exists and if it does then alert the user.
+        // bean validator recommended
+        // https://weber.instructure.com/courses/506356/pages/bean-validators
+        
         user.setEnabled(true);
         user.setLocked(false);
         user.setExpiredOn(null);
