@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping(("blog"))
+@RequestMapping("blog")
 public class BlogController {
 
 
@@ -33,4 +33,6 @@ public class BlogController {
         mv.getModelMap().addAttribute("tagList ", "tagList" );
         return mv;
     }
+    
+    
 }
