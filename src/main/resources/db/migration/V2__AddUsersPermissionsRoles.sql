@@ -13,11 +13,11 @@ INSERT INTO Role (RoleName) values ("Sensitive User No Comment");
 INSERT INTO Role (RoleName) values ("Admin");
 INSERT INTO Role (RoleName) values ("Creator");
 
-INSERT INTO PERMISSION (PermissionName) values ("Can Comment");
-INSERT INTO PERMISSION (PermissionName) values ("Can Create Blogs");
-INSERT INTO PERMISSION (PermissionName) values ("Can View Private Blogs");
-INSERT INTO PERMISSION (PermissionName) values ("Can View Sensitive Blogs");
-INSERT INTO PERMISSION (PermissionName) values ("Can Delete Blogs");
-INSERT INTO PERMISSION (PermissionName) values ("Can Edit Users");
-INSERT INTO PERMISSION (PermissionName) values ("Can Edit Blogs");
+INSERT INTO Permission (PermissionName) values ("Can Comment");
+INSERT INTO Permission (PermissionName) values ("Can Create Blogs");
+INSERT INTO Permission (PermissionName) values ("Can View Private Blogs");
+INSERT INTO Permission (PermissionName) values ("Can View Sensitive Blogs");
+INSERT INTO Permission (PermissionName) values ("Can Delete Blogs");
+INSERT INTO Permission (PermissionName) values ("Can Edit Users");
+INSERT INTO Permission (PermissionName) values ("Can Edit Blogs");
 
