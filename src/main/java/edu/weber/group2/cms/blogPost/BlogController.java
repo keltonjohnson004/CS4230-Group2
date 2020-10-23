@@ -42,5 +42,10 @@ public class BlogController {
         return mv;
     }
     
+    @RequestMapping(value="create", method = RequestMethod.GET)
+    public ModelAndView GetCreatePost(Model model) {
+    	ModelAndView mv = new ModelAndView("blog/create_post");
+    	return mv;
+    }
     
 }
