@@ -27,10 +27,18 @@ public class BlogController {
 
 
     @RequestMapping(value = "postBlog", method = RequestMethod.GET)
-    public ModelAndView launchPage(Model model) {
+    public ModelAndView GetBlogPost(Model model) {
         List<Tag> tagList = blogService.getAllTags();
         ModelAndView mv = new ModelAndView("blog/postBlog");
-        mv.getModelMap().addAttribute("tagList ", "tagList" );
+        mv.getModelMap().addAttribute("tagList", tagList );
+        return mv;
+    }
+
+
+    @RequestMapping(value="blog", method = RequestMethod.GET)
+    public ModelAndView GetBlog(Model model)
+    {
+        ModelAndView mv = new ModelAndView("blog/blog");
         return mv;
     }
     
