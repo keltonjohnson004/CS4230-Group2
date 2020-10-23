@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -26,9 +27,10 @@ public class BlogController {
 
 
     @RequestMapping(value = "postBlog", method = RequestMethod.GET)
-    public String launchPage(Model model) {
+    public ModelAndView launchPage(Model model) {
         List<Tag> tagList = blogService.getAllTags();
-        model.addAttribute("tagList ", tagList );
-        return "blog/postBlog";
+        ModelAndView mv = new ModelAndView("blog/postBlog");
+        mv.getModelMap().addAttribute("tagList ", "tagList" );
+        return mv;
     }
 }

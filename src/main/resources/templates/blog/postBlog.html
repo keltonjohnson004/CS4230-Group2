@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--<html lang="en">-->
-<html xmlns:th="http://www.w3.org/1000/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -13,11 +13,14 @@
 <!--            <option value="0">select tag</option>-->
 <!--            <option th:each="${tagList}" th:value="${tagList.id}" th:text="${tagList.name}"/>-->
 <!--        </select>-->
-Hello
-        <div th:each="current : ${tagList}">
-           <div th:text="${current.id}"/>
-        </div>
 
+<!--        <div th:each="current : ${tagList}">-->
+<!--            <div>Hello</div>-->
+<!--           <div th:text="${current.id}"></div>-->
+<!--        </div>-->
+
+
+        <span th:text="${tagList}"></span>
 
 
     </div>
