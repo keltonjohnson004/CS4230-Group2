@@ -1,14 +1,20 @@
 package edu.weber.group2.cms.blogPost;
 
+import edu.weber.group2.cms.blogPost.model.Blog;
 import edu.weber.group2.cms.blogPost.model.Tag;
 import edu.weber.group2.cms.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -25,7 +31,6 @@ public class BlogController {
     }
 
 
-
     @RequestMapping(value = "postBlog", method = RequestMethod.GET)
     public ModelAndView GetBlogPost(Model model) {
         List<Tag> tagList = blogService.getAllTags();
@@ -34,6 +39,13 @@ public class BlogController {
         return mv;
     }
 
+    @RequestMapping(value="postBlog", method= RequestMethod.POST)
+    public ModelAndView PostBlogPost(@ModelAttribute("NewBlogPost") Blog blog, BindingResult result)
+    {
+        blogService.addBlogPost(blog);
+        ModelAndView mv = new ModelAndView("blog/blog");
+        return mv;
+    }
 
     @RequestMapping(value="blog", method = RequestMethod.GET)
     public ModelAndView GetBlog(Model model)
