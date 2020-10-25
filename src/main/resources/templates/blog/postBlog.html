@@ -9,20 +9,36 @@
 <body>
 <main>
     <div>
-<!--        <select th:field="*{tagList}">-->
-<!--            <option value="0">select tag</option>-->
-<!--            <option th:each="${tagList}" th:value="${tagList.id}" th:text="${tagList.name}"/>-->
-<!--        </select>-->
 
-        <div th:each="current : ${tagList}">
-            <div>Hello</div>
-           <div th:text="${current.id}"></div>
-        </div>
+        <form method="post">
 
 
-
-
-
+                <div>
+                    <h2>Blog Title:</h2>
+                    <input type="text" name="blogName" id="blogName"/>
+                </div>
+                <div>
+                    <h2>Tags:</h2>
+                    <select name="tags" id="tags" size="5" multiple>
+                        <optgroup h2="Select Tags for the blog post:">
+                        <div th:each="current:${tagList}">
+                            <option> <div th:text="${current.name}"></div></option>
+                        </div>
+                        </optgroup>
+                    </select>
+                    <h2>Permission:</h2>
+                    <select name="permission" id="permission" size = 3>
+                        <option default>None</option>
+                        <option>Private</option>
+                        <option>Sensitive</option>
+                    </select>
+                </div>
+                <div>
+                    <br>
+                    <textarea name="blogBody" id="blogBody" rows="30" cols="60"></textarea>
+                </div>
+            <input type="submit">
+        </form>
     </div>
 
 
