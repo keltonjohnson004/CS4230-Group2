@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+</head>
+<body>
+    <main>
+        <form method="post">
+            ID: <input type="text" th:value="${user.id}" id="id" name="id" readonly><br>
+            First Name: <input type="text" th:value="${user.firstName}" id="FirstName" name="FirstName" readonly><br>
+            Last Name: <input type="text" th:value="${user.lastName}" id="LastName" name="LastName" readonly><br>
+            User Name: <input type="text" th:value="${user.userName}" readonly><br>
+            Role:
+            <select name="Role" id="Role">
+                <option value="none" selected disabled hidden>Select an Role</option>
+                <div th:each="current:${roleList}">
+                    <option th:value="${current.id}"> <div th:text="${current.name}"></div></option>
+                </div>
+            </select> <br>
+            <input type="submit">
+            <a href="/admin">Cancel</a>
+        </form>
+    </main>
+</body>
+</html>

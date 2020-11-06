@@ -1,18 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<style>
+		div.post{
+		width: 80%;
+		border: 1px solid #000000;
+		word-wrap: break-word;
+		margin-left: auto;
+   		margin-right: auto;
+		}
+	</style>
     <meta charset="UTF-8">
     <title>HomePage</title>
 </head>
 <body>
     <main>
-    	<div class="addBlogPost">
-    		<button>Add Blog Post</button>
-    	</div>
-    	<div class="blogPost">Blog Post Here</div>
-    	<div class="blogPost">Blog Post Here</div>
-    	<div class="blogPost">Blog Post Here</div>
-    	<div class="blogPost">Blog Post Here</div>
+		<form th:action="@{/}" method="get">
+			<input type="text" name="query" id="query" th:value="*{query}"/>
+		</form>
+		<div th:each="current:${blogList}">
+			<a href="blog/readBlog/${current.id}">
+				<div class="post">
+					<h1 th:text="${current.blogName}"></h1>
+					<div th:text="${current.blogBody}"></div>
+				</div>
+			</a>
+		</div>
     </main>
 </body>
 </html>

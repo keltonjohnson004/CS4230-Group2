@@ -18,6 +18,10 @@ public class User implements UserDetails {
     private String UserName;
     @JsonIgnore
     private String Password;
+    private String role;
+
+
+
     private boolean Locked;
     private boolean Enabled;
     private ZonedDateTime CredentialExpiredOn;
@@ -26,6 +30,7 @@ public class User implements UserDetails {
     private ZonedDateTime ModifiedOn;
 
     private Map<Integer, Role> roles;
+
 
 
 
@@ -183,5 +188,11 @@ public class User implements UserDetails {
     }
 
 
+    public String getRole() {
+        return role;
+    }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

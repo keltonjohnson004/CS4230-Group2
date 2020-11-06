@@ -8,10 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,6 +55,13 @@ public class BlogController {
     public ModelAndView GetCreatePost(Model model) {
     	ModelAndView mv = new ModelAndView("blog/create_post");
     	return mv;
+    }
+
+    @RequestMapping(value="readBlog/{blogID}", method=RequestMethod.GET)
+    public ModelAndView GetReadBlog(@PathVariable("blogID") String blogID)
+    {
+        ModelAndView mv = new ModelAndView("blog/readBlog");
+        return mv;
     }
     
 }

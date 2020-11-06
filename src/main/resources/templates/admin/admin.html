@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+</head>
+<body>
+    <main>
+
+            <table>
+                <thead>
+                <th>ID</th>
+                <th>First Name</th>
+
+                <th>Last Name</th>
+                <th>User Name</th>
+                <th></th>
+                </thead>
+                <div th:each="current:${userList}">
+                <tbody>
+                <tr>
+
+
+                <td><span th:text="${current.Id}"></span></td>
+                <td><div th:text="${current.FirstName}"> </div></td>
+                <td><div th:text="${current.LastName}"> </div></td>
+                <td><div th:text="${current.UserName}"> </div></td>
+
+                <td><a th:href="@{admin/editUser/{userName}(userName=${current.userName})}"> Edit</a></td>
+
+                </tr>
+                </tbody>
+            </table>
+        <td><a href="admin/editUser"> Edit</a></td>
+
+        </div>
+    </main>
+</body>
+</html>
