@@ -38,4 +38,11 @@ public class BlogService {
         tagRepository.addTag(blog);
         permissionRepository.addPermission(blog);
     }
+
+    public Blog getBlogByID(String id)
+    {
+        return blogRepository.getBlogByID(id);
+    }
+
+
 }

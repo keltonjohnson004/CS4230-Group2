@@ -41,10 +41,10 @@ public class MainPageCallbackHandler implements RowCallbackHandler {
                {
                    readBlog.setAuthorLastName(rs.getString("u.LastName"));
                }
-//               if(readBlog.getPermissionID() == 0)
-//               {
-//                   readBlog.setPermissionID(rs.getInt("p.PermissionID"));
-//               }
+               if(readBlog.getPermissionID() == 0)
+               {
+                   readBlog.setPermissionID(rs.getInt("p.PermissionID"));
+               }
 
                List<Integer> tags = new ArrayList<>();
 

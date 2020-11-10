@@ -44,4 +44,10 @@ public class UserService implements UserDetailsService
 
         return user;
     }
+
+    public User getUserByID(int id)
+    {
+        return userRepository.getUserByID(id);
+    }
+
 }

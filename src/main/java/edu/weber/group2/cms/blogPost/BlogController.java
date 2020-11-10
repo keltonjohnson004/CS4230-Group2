@@ -3,6 +3,7 @@ package edu.weber.group2.cms.blogPost;
 import edu.weber.group2.cms.blogPost.model.Blog;
 import edu.weber.group2.cms.blogPost.model.Tag;
 import edu.weber.group2.cms.user.UserService;
+import edu.weber.group2.cms.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,13 @@ public class BlogController {
 
 
     private BlogService blogService;
+    private UserService userService;
 
     @Autowired
-    public BlogController(BlogService _blogService)
+    public BlogController(BlogService _blogService, UserService _userService)
     {
         this.blogService = _blogService;
+        this.userService = _userService;
     }
 
 
@@ -61,7 +64,15 @@ public class BlogController {
     public ModelAndView GetReadBlog(@PathVariable("blogID") String blogID)
     {
         ModelAndView mv = new ModelAndView("blog/readBlog");
+        Blog blog = blogService.getBlogByID(blogID);
+        User author = userService.getUserByID(blog.getAuthorID());
+        mv.getModelMap().addAttribute("blog", blog );
+        mv.getModelMap().addAttribute("author", author );
         return mv;
     }
+
+
+
+
     
 }

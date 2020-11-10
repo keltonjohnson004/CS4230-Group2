@@ -24,7 +24,8 @@ public class MainPageRepository
 
     private String getAllBlogsString = "SELECT * FROM Blog AS b " +
             "LEFT JOIN UserInfo AS u ON b.AuthorID = u.ID " +
-            "LEFT JOIN BlogToTag AS t ON t.BlogID = b.ID  ";
+            "LEFT JOIN BlogToTag AS t ON t.BlogID = b.ID  " +
+            "LEFT JOIN BlogToPermission as p ON p.BlogID = b.ID";
 
 
 

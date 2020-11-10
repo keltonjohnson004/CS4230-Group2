@@ -32,6 +32,8 @@ public class BlogRepository {
             ":AuthorID)";
 
 
+    public String getBlogByIDString = "SELECT ID, BlogTitle, BlogBody, AuthorID FROM Blog WHERE ID = :id";
+
     public String selectBlogID = "SELECT ID FROM Blog WHERE BlogTitle = :BlogTitle AND BlogBody = :BlogBody AND AuthorID = :AuthorID";
     @Autowired
     private HttpServletRequest request;
@@ -92,5 +94,17 @@ public class BlogRepository {
         }
 
         return 0;
+    }
+
+    public Blog getBlogByID(String id)
+    {
+        String sql = getBlogByIDString;
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id);
+        ReadBlogCallbackHandler callbackHandler = new ReadBlogCallbackHandler();
+        jdbcTemplate.query(sql, parameterSource, callbackHandler);
+        Blog blog = callbackHandler.getBlog();
+        return blog;
+
     }
 }
