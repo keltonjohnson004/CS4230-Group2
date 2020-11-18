@@ -17,6 +17,14 @@
     <main>
 		<form th:action="@{/}" method="get">
 			<input type="text" name="query" id="query" th:value="*{query}"/>
+			<select name="tags" id="tags" th:value="*{tag}" size="5">
+				<optgroup h2="Select Tags for the blog post:">
+					<div th:each="current:${tagList}">
+						<option> <div th:text="${current.name}"></div></option>
+					</div>
+				</optgroup>
+			</select>
+			<input type="submit">
 		</form>
 		<div th:each="current:${blogList}">
 
@@ -24,6 +32,7 @@
 					<a th:href="@{blog/readBlog/{id}(id=${current.BlogID})}">
 						<h1 th:text="${current.blogName}"></h1>
 					</a>
+
 					<div th:text="${current.blogBody}"></div>
 				</div>
 

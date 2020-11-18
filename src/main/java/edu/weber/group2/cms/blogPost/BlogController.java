@@ -110,12 +110,13 @@ public class BlogController {
         return mv;
     }
 
-    @RequestMapping(value="readBlog/*", method=RequestMethod.POST)
+    @RequestMapping(value="readBlog/{blogID}", method=RequestMethod.POST)
     public String postReadBlog(@ModelAttribute("NewComment") CommentModel comment, BindingResult result)
     {
        // ModelAndView mv = new ModelAndView("blog/readBlog/" + comment.getBlogID());
         blogService.addComment(comment);
-        return "../readBlog/" + comment.getBlogID();
+        //mv.getModelMap().addAttribute()
+        return "redirect:/blog/readBlog/" + comment.getBlogID();
 
     }
 

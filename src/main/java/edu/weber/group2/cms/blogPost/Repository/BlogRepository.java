@@ -2,20 +2,13 @@ package edu.weber.group2.cms.blogPost.Repository;
 
 import edu.weber.group2.cms.blogPost.model.Blog;
 import edu.weber.group2.cms.comments.CommentModel;
-import edu.weber.group2.cms.comments.commentCallbackHandler;
-import edu.weber.group2.cms.user.repository.UserRowCallbackHandler;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
+import edu.weber.group2.cms.comments.CommentCallbackHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.servlet.server.Session;
-import org.springframework.http.HttpHeaders;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -115,7 +108,7 @@ public class BlogRepository {
         String sql = getCommentsString;
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("blogID", blogID);
-        commentCallbackHandler callbackHandler = new commentCallbackHandler();
+        CommentCallbackHandler callbackHandler = new CommentCallbackHandler();
         jdbcTemplate.query(sql, parameterSource, callbackHandler);
         return callbackHandler.getComments();
     }

@@ -1,20 +1,14 @@
 package edu.weber.group2.cms.mainPage;
 
-import edu.weber.group2.cms.blogPost.Repository.BlogRepository;
-import edu.weber.group2.cms.blogPost.Repository.PermissionRepository;
-import edu.weber.group2.cms.blogPost.Repository.TagRepository;
 import edu.weber.group2.cms.blogPost.model.ReadBlog;
 import edu.weber.group2.cms.user.model.Permission;
 import edu.weber.group2.cms.user.model.Role;
 import edu.weber.group2.cms.user.model.User;
-import javafx.scene.control.Tab;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -28,11 +22,11 @@ public class MainPageService {
     }
 
 
-    public List<ReadBlog> getAllBlogs(String search, int pageNo, int pageSize, Principal principal)
+    public List<ReadBlog> getAllBlogs(String search, String tag, int pageNo, int pageSize, Principal principal)
     {
 
         User user = ((User)((UsernamePasswordAuthenticationToken) principal).getPrincipal());
-        List<ReadBlog> blogList = mainPageRepository.getAllBlogs(search);
+        List<ReadBlog> blogList = mainPageRepository.getAllBlogs(search,tag);
         List<ReadBlog> returnBlogList = new ArrayList<>();
         List<Integer> permIds = new ArrayList<>();
 
@@ -69,10 +63,10 @@ public class MainPageService {
         }
         return returnBlogList;
     }
-    public List<ReadBlog> getAllBlogs(String search, int pageNo, int pageSize)
+    public List<ReadBlog> getAllBlogs(String search, String tag, int pageNo, int pageSize)
     {
 
-        List<ReadBlog> blogList = mainPageRepository.getAllBlogs(search);
+        List<ReadBlog> blogList = mainPageRepository.getAllBlogs(search, tag);
         List<ReadBlog> returnBlogList = new ArrayList<>();
         for (ReadBlog blog: blogList)
         {
