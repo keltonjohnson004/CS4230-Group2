@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HomePage</title>
+</head>
+<body>
+<main>
+
+    <form method="post">
+        <p hidden><input type="text" name="id" id="id" th:value="${blog.Id}"/></p>
+        <p hidden><input type="text" name="authorID" id="authorID" th:value="${blog.authorID}"/></p>-->
+        Title: <input type="text" name="blogName" id="blogName" th:value="${blog.BlogName}"/><br>
+        Body: <br>
+        <textarea name="blogBody" id="blogBody" rows="30" cols="120" th:text="${blog.BlogBody}" ></textarea>
+        <input type="submit" value="Update">
+    </form>
+
+
+
+</main>
+</body>
+</html>

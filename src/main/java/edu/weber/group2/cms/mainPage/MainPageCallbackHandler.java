@@ -54,10 +54,21 @@ public class MainPageCallbackHandler implements RowCallbackHandler {
                    readBlog.setTags(tags);
                }
 
+                boolean doesBlogExist = false;
+                for(ReadBlog checkingBlog: blogList)
+                {
+                    if(checkingBlog.getBlogID() == readBlog.getBlogID())
+                    {
+                        List<Integer> temp = checkingBlog.getTags();
+                        temp.add(tags.get(0));
+                        checkingBlog.setTags(temp);
+                        doesBlogExist = true;
+                    }
+                }
 
-
-               blogList.add(readBlog);
-
+                if(!doesBlogExist) {
+                    blogList.add(readBlog);
+                }
 
 
 

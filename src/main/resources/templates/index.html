@@ -19,12 +19,14 @@
 			<input type="text" name="query" id="query" th:value="*{query}"/>
 		</form>
 		<div th:each="current:${blogList}">
-			<a th:href="@{blog/readBlog/{id}(id=${current.BlogID})}">
+
 				<div class="post">
-					<h1 th:text="${current.blogName}"></h1>
+					<a th:href="@{blog/readBlog/{id}(id=${current.BlogID})}">
+						<h1 th:text="${current.blogName}"></h1>
+					</a>
 					<div th:text="${current.blogBody}"></div>
 				</div>
-			</a>
+
 		</div>
     </main>
 </body>

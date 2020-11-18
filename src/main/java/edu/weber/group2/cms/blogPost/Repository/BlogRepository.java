@@ -1,6 +1,8 @@
 package edu.weber.group2.cms.blogPost.Repository;
 
 import edu.weber.group2.cms.blogPost.model.Blog;
+import edu.weber.group2.cms.comments.CommentModel;
+import edu.weber.group2.cms.comments.commentCallbackHandler;
 import edu.weber.group2.cms.user.repository.UserRowCallbackHandler;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -51,21 +53,6 @@ public class BlogRepository {
     public int addBlog(Blog blog)
     {
 
-        Cookie[] cookies = request.getCookies();
-
-        for(Cookie cookie: cookies)
-        {
-            if("sessionId".equalsIgnoreCase(cookie.getName()))
-            {
-                Jws<Claims> jws = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(cookie.getValue());
-
-                Claims claims = jws.getBody();
-
-                int authorID = Integer.valueOf(claims.get("sub",String.class));
-                blog.setAuthorID(authorID);
-            }
-        }
-
 
 
         Map<String,Object> inputParameters = new HashMap();
@@ -106,5 +93,42 @@ public class BlogRepository {
         Blog blog = callbackHandler.getBlog();
         return blog;
 
+    }
+
+    private String updateString = "UPDATE Blog SET blogTitle = :blogName, blogBody = :blogBody WHERE ID = :blogID";
+
+    public void updateBlog(Blog blog)
+    {
+        String sql = updateString;
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("blogName", blog.getBlogName());
+        parameterSource.addValue("blogBody", blog.getBlogBody());
+        parameterSource.addValue("blogID", blog.getId());
+        jdbcTemplate.update(sql, parameterSource);
+
+    }
+
+    private String getCommentsString = "SELECT ID, UserID, BlogID, CommentBody FROM Comment WHERE BlogID = :blogID ";
+
+    public List<CommentModel> getComments(String blogID)
+    {
+        String sql = getCommentsString;
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("blogID", blogID);
+        commentCallbackHandler callbackHandler = new commentCallbackHandler();
+        jdbcTemplate.query(sql, parameterSource, callbackHandler);
+        return callbackHandler.getComments();
+    }
+
+
+    private String addCommentString = "INSERT INTO Comment (BlogID, commentBody, UserID) values (:blogID, :commentBody, :userID)";
+    public void addComment(CommentModel comment)
+    {
+        String sql = addCommentString;
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("blogID", comment.getBlogID());
+        parameterSource.addValue("commentBody", comment.getCommentBody());
+        parameterSource.addValue("userID", comment.getCommentorID());
+        jdbcTemplate.update(sql, parameterSource);
     }
 }

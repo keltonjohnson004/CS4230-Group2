@@ -89,7 +89,7 @@ public class UserRepository {
             +":CredentialExpiredOn,"
             +":ExpiredOn)";
 
-    private String getUsernameByID =  "SELECT FirstName, LastName, UserName FROM UserInfo WHERE ID = :id";
+    private String getUsernameByID =  "SELECT ID, FirstName, LastName, UserName FROM UserInfo WHERE ID = :id";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     public UserRepository(NamedParameterJdbcTemplate jdbcTemplate)

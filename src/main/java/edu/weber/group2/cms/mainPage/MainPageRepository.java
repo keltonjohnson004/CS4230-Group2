@@ -1,11 +1,10 @@
 package edu.weber.group2.cms.mainPage;
 
-import edu.weber.group2.cms.blogPost.Repository.TagCallBackHandler;
 import edu.weber.group2.cms.blogPost.model.ReadBlog;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.thymeleaf.expression.Maps;
+
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class MainPageRepository
     private String getAllBlogsString = "SELECT * FROM Blog AS b " +
             "LEFT JOIN UserInfo AS u ON b.AuthorID = u.ID " +
             "LEFT JOIN BlogToTag AS t ON t.BlogID = b.ID  " +
-            "LEFT JOIN BlogToPermission as p ON p.BlogID = b.ID";
+            "LEFT JOIN BlogToPermission as p ON p.BlogID = b.ID " ;
 
 
 
@@ -35,7 +34,7 @@ public class MainPageRepository
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         if(search!= null) {
             sql = sql + "WHERE lower(b.blogTitle) like lower(:blogName)";
-            parameterSource.addValue("blogName", "%" + search + "%");
+           parameterSource.addValue("blogName",  "%" + search +"%");
         }
 
         MainPageCallbackHandler callBackHandler = new MainPageCallbackHandler();

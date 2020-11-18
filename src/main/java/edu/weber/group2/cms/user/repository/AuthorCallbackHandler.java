@@ -24,6 +24,10 @@ public class AuthorCallbackHandler implements RowCallbackHandler {
         {
             readAuthor.setUserName(rs.getString("UserName"));
         }
+        if(readAuthor.getId() == 0)
+        {
+            readAuthor.setId(rs.getInt("ID"));
+        }
         author = readAuthor;
     }
 

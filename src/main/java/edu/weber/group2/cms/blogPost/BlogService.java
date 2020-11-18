@@ -5,9 +5,13 @@ import edu.weber.group2.cms.blogPost.Repository.PermissionRepository;
 import edu.weber.group2.cms.blogPost.Repository.TagRepository;
 import edu.weber.group2.cms.blogPost.model.Blog;
 import edu.weber.group2.cms.blogPost.model.Tag;
+import edu.weber.group2.cms.comments.CommentModel;
+import edu.weber.group2.cms.user.model.User;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -32,9 +36,11 @@ public class BlogService {
     }
 
 
-    public void addBlogPost(Blog blog)
+    public void addBlogPost(Blog blog, Principal principal)
     {
-        blog.setId(blogRepository.addBlog(blog));
+        User user = (User)((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+        blog.setId(user.getId());
+        blogRepository.addBlog(blog);
         tagRepository.addTag(blog);
         permissionRepository.addPermission(blog);
     }
@@ -45,4 +51,19 @@ public class BlogService {
     }
 
 
+    public void updateBlog(Blog blog)
+    {
+        blogRepository.updateBlog(blog);
+    }
+
+    public List<CommentModel> getComments(String blogID)
+    {
+        return blogRepository.getComments(blogID);
+    }
+
+
+    public void addComment(CommentModel comment)
+    {
+        blogRepository.addComment(comment);
+    }
 }

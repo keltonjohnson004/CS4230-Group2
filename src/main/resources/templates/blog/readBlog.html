@@ -5,6 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <title>HomePage</title>
+    <style>
+		div.post{
+		width: 100%;
+		border: 1px solid #000000;
+		word-wrap: break-word;
+
+		}
+	</style>
 </head>
 <body>
 <main>
@@ -14,6 +22,38 @@
     <div th:text="${author.UserName}"></div>
     ======================================
     <div th:text = "${blog.BlogBody}"></div>
+
+    <div th:switch="${userIsAuthor}">
+        <p th:case=true><a th:href="@{../editBlog/{id}(id=${blog.Id})}">Edit</a></p>
+    </div>
+
+
+==========================================
+                COMMENTS
+==========================================
+
+    <div th:each="current:${comments}">
+
+        <div class="post">
+
+            <div th:text="${current.commentBody}"></div>
+        </div>
+
+    </div>
+
+
+    ==========================================
+    NEW COMMENTS
+    ==========================================
+
+    <div th:switch="${userCanComment}">
+        <form method="post">
+            <input hidden type="text" name="blogID" id="blogID" th:value="${blog.Id}" readonly/>
+            <input hidden type="text" name="commentorID" id="commentorID" th:value="${user.Id}" readonly/>
+            <textarea name="commentBody" id="commentBody" rows="15" cols="120"></textarea>
+            <input type="submit">
+        </form>
+    </div>
 
 </main>
 </body>
