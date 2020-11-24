@@ -27,9 +27,17 @@ public class BlogRepository {
             ":AuthorID)";
 
 
-    public String getBlogByIDString = "SELECT ID, BlogTitle, BlogBody, AuthorID FROM Blog WHERE ID = :id";
+    public String getBlogByIDString = "SELECT * FROM Blog AS b " +
+            "            LEFT JOIN UserInfo AS u ON b.AuthorID = u.ID" +
+            "            LEFT JOIN BlogToTag AS t ON t.BlogID = b.ID " +
+            "           LEFT JOIN BlogToPermission as p ON p.BlogID = b.ID WHERE 1=1 AND b.ID = :id";
 
     public String selectBlogID = "SELECT ID FROM Blog WHERE BlogTitle = :BlogTitle AND BlogBody = :BlogBody AND AuthorID = :AuthorID";
+
+    public String deleteBlogByID = "DELETE FROM Blog WHERE ID = :id";
+    public String deleteBlogPermissionByID = "DELETE FROM BlogToPermission WHERE blogId = :id";
+    public String deleteBlogTagByID = "DELETE FROM BlogToTag WHERE blogId = :id";
+
     @Autowired
     private HttpServletRequest request;
 
@@ -123,5 +131,32 @@ public class BlogRepository {
         parameterSource.addValue("commentBody", comment.getCommentBody());
         parameterSource.addValue("userID", comment.getCommentorID());
         jdbcTemplate.update(sql, parameterSource);
+    }
+
+    public Blog deleteBlogByID(String id)
+    {
+        String sql = getBlogByIDString;
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id);
+        ReadBlogCallbackHandler callbackHandler = new ReadBlogCallbackHandler();
+        jdbcTemplate.query(sql, parameterSource, callbackHandler);
+        Blog blog = callbackHandler.getBlog();
+
+
+
+        sql = deleteBlogTagByID;
+        parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id);
+        jdbcTemplate.update(sql,parameterSource);
+        sql = deleteBlogPermissionByID;
+        parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id);
+        jdbcTemplate.update(sql,parameterSource);
+        sql = deleteBlogByID;
+        parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id);
+        jdbcTemplate.update(sql,parameterSource);
+
+        return blog;
     }
 }

@@ -39,8 +39,15 @@ public class BlogService {
     public void addBlogPost(Blog blog, Principal principal)
     {
         User user = (User)((UsernamePasswordAuthenticationToken) principal).getPrincipal();
-        blog.setId(user.getId());
-        blogRepository.addBlog(blog);
+        blog.setAuthorID(user.getId());
+        blog.setId(blogRepository.addBlog(blog));
+        tagRepository.addTag(blog);
+        permissionRepository.addPermission(blog);
+    }
+
+    public void addBlogPost(Blog blog)
+    {
+        blog.setId(blogRepository.addBlog(blog));
         tagRepository.addTag(blog);
         permissionRepository.addPermission(blog);
     }
@@ -65,5 +72,10 @@ public class BlogService {
     public void addComment(CommentModel comment)
     {
         blogRepository.addComment(comment);
+    }
+
+    public Blog deleteBlogById(String id)
+    {
+        return blogRepository.deleteBlogByID(id);
     }
 }
