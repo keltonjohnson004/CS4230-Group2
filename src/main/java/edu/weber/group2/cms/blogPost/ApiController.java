@@ -62,6 +62,7 @@ public class ApiController {
         return blog;
     }
 
+
     @RequestMapping(value="updateBlog", method=RequestMethod.GET)
     public Blog updateBlog(@RequestParam("blogId") int blogId, @RequestParam("blogTitle") String blogTitle, @RequestParam("blogBody") String blogBody, @RequestParam("AuthorID") int authorID)
     {
@@ -74,6 +75,7 @@ public class ApiController {
         blogService.updateBlog(blog);
         return blog;
     }
+
 
 
 

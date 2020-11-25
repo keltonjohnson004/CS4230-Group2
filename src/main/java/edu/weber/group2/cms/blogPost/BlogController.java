@@ -111,9 +111,11 @@ public class BlogController {
     }
 
     @RequestMapping(value="readBlog/{blogID}", method=RequestMethod.POST)
-    public String postReadBlog(@ModelAttribute("NewComment") CommentModel comment, BindingResult result)
+    public String postReadBlog(@ModelAttribute("NewComment") CommentModel comment, BindingResult result, Principal principal)
     {
        // ModelAndView mv = new ModelAndView("blog/readBlog/" + comment.getBlogID());
+        User user = (User)((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+        comment.setCommentorID(user.getId());
         blogService.addComment(comment);
         //mv.getModelMap().addAttribute()
         return "redirect:/blog/readBlog/" + comment.getBlogID();

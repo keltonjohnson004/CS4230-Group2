@@ -42,18 +42,25 @@
     </div>
 
 
-    ==========================================
-    NEW COMMENTS
-    ==========================================
 
-    <div th:switch="${userCanComment}">
-        <form method="post">
-            <input hidden type="text" name="blogID" id="blogID" th:value="${blog.Id}" readonly/>
-            <input hidden type="text" name="commentorID" id="commentorID" th:value="${user.Id}" readonly/>
-            <textarea name="commentBody" id="commentBody" rows="15" cols="120"></textarea>
-            <input type="submit">
-        </form>
-    </div>
+
+
+            <form method="post">
+                <div th:switch="${userCanComment}">
+                    <p th:case=true>
+                        ==========================================
+                        NEW COMMENTS
+                        ==========================================
+
+
+                        <input hidden type="text" name="blogID" id="blogID" th:value="${blog.Id}" readonly/>
+                <input hidden type="text" name="commentorID" id="commentorID" th:value="${user.Id}" readonly/>
+                <textarea name="commentBody" id="commentBody" rows="15" cols="120"></textarea>
+                <input type="submit">
+                    </p>
+                </div>
+            </form>
+
 
 </main>
 </body>
