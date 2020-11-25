@@ -24,18 +24,24 @@ public class MainPageRepository
     private String getAllBlogsString = "SELECT * FROM Blog AS b " +
             "LEFT JOIN UserInfo AS u ON b.AuthorID = u.ID " +
             "LEFT JOIN BlogToTag AS t ON t.BlogID = b.ID  " +
-            "LEFT JOIN BlogToPermission as p ON p.BlogID = b.ID " ;
+            "LEFT JOIN BlogToPermission as p ON p.BlogID = b.ID WHERE 1=1 " ;
 
 
 
-    public List<ReadBlog> getAllBlogs(String search)
+    public List<ReadBlog> getAllBlogs(String search, String tag)
     {
         String sql = getAllBlogsString;
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         if(search!= null) {
-            sql = sql + "WHERE lower(b.blogTitle) like lower(:blogName)";
+            sql = sql + "AND lower(b.blogTitle) like lower(:blogName)";
            parameterSource.addValue("blogName",  "%" + search +"%");
         }
+        if(tag != null)
+        {
+            sql = sql + "AND t.tagID = :tag";
+            parameterSource.addValue("tag", tag);
+        }
+
 
         MainPageCallbackHandler callBackHandler = new MainPageCallbackHandler();
         jdbcTemplate.query(sql, parameterSource, callBackHandler);

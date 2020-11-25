@@ -7,6 +7,7 @@
 <body>
 	<nav th:replace="~{nav/base :: nav}" ></nav>
     <main>
+<<<<<<< HEAD
 		<div class="container" style="margin-top: 20px;">
 			<div class="row">
 				<div class="col-md-12" th:each="current:${blogList}">
@@ -18,6 +19,27 @@
 							<div th:text="${current.blogBody}"></div>
 						</div>
 						<hr>
+=======
+		<form th:action="@{/}" method="get">
+			<input type="text" name="query" id="query" th:value="*{query}"/>
+			<select name="tags" id="tags" th:value="*{tag}" size="5">
+				<optgroup h2="Select Tags for the blog post:">
+					<div th:each="current:${tagList}">
+						<option> <div th:text="${current.name}"></div></option>
+					</div>
+				</optgroup>
+			</select>
+			<input type="submit">
+		</form>
+		<div th:each="current:${blogList}">
+
+				<div class="post">
+					<a th:href="@{blog/readBlog/{id}(id=${current.BlogID})}">
+						<h1 th:text="${current.blogName}"></h1>
+					</a>
+
+					<div th:text="${current.blogBody}"></div>
+>>>>>>> 1472332ed8c4b1886281e40477911bfce04454f8
 				</div>
 			</div>
 		</div>

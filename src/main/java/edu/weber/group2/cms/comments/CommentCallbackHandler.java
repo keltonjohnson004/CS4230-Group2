@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class commentCallbackHandler implements RowCallbackHandler {
+public class CommentCallbackHandler implements RowCallbackHandler {
 
     List<CommentModel> comments = new ArrayList<>();
 

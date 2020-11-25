@@ -33,29 +33,38 @@ public class MainPageController {
 
 
     private MainPageService mainPageService;
+    private BlogService blogService;
 
     @Autowired
-    public MainPageController(MainPageService _mainPageService)
+    public MainPageController(MainPageService _mainPageService,BlogService blogService)
     {
         this.mainPageService = _mainPageService;
+        this.blogService = blogService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView GetMainPage(Model model, @RequestParam(required = false) String query, @RequestParam(defaultValue = "0") Integer pageNo,
+    public ModelAndView GetMainPage(Model model, @RequestParam(required = false) String query,
+                                    @RequestParam(required = false) String tag,
+                                    @RequestParam(defaultValue = "0") Integer pageNo,
                                     @RequestParam(defaultValue = "10") Integer pageSize, Principal principal) {
 
 
         List<ReadBlog> blogList = new ArrayList<ReadBlog>();
         if(principal == null)
         {
-            blogList = mainPageService.getAllBlogs(query, pageNo, pageSize);
+            blogList = mainPageService.getAllBlogs(query,tag, pageNo, pageSize);
         }
         else {
-            blogList = mainPageService.getAllBlogs(query, pageNo, pageSize, principal);
+            blogList = mainPageService.getAllBlogs(query,tag, pageNo, pageSize, principal);
         }
         ModelAndView mv = new ModelAndView("index");
         mv.getModelMap().addAttribute("blogList", blogList );
+<<<<<<< HEAD
         mv.getModelMap().addAttribute("page_title", "home page");
+=======
+        List<Tag> tagList = blogService.getAllTags();
+        mv.getModelMap().addAttribute("tagList", tagList );
+>>>>>>> 1472332ed8c4b1886281e40477911bfce04454f8
         return mv;
     }
 }

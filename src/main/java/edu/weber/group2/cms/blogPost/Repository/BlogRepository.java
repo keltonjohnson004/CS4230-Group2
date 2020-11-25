@@ -2,20 +2,13 @@ package edu.weber.group2.cms.blogPost.Repository;
 
 import edu.weber.group2.cms.blogPost.model.Blog;
 import edu.weber.group2.cms.comments.CommentModel;
-import edu.weber.group2.cms.comments.commentCallbackHandler;
-import edu.weber.group2.cms.user.repository.UserRowCallbackHandler;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
+import edu.weber.group2.cms.comments.CommentCallbackHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.servlet.server.Session;
-import org.springframework.http.HttpHeaders;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -34,9 +27,17 @@ public class BlogRepository {
             ":AuthorID)";
 
 
-    public String getBlogByIDString = "SELECT ID, BlogTitle, BlogBody, AuthorID FROM Blog WHERE ID = :id";
+    public String getBlogByIDString = "SELECT * FROM Blog AS b " +
+            "            LEFT JOIN UserInfo AS u ON b.AuthorID = u.ID" +
+            "            LEFT JOIN BlogToTag AS t ON t.BlogID = b.ID " +
+            "           LEFT JOIN BlogToPermission as p ON p.BlogID = b.ID WHERE 1=1 AND b.ID = :id";
 
     public String selectBlogID = "SELECT ID FROM Blog WHERE BlogTitle = :BlogTitle AND BlogBody = :BlogBody AND AuthorID = :AuthorID";
+
+    public String deleteBlogByID = "DELETE FROM Blog WHERE ID = :id";
+    public String deleteBlogPermissionByID = "DELETE FROM BlogToPermission WHERE blogId = :id";
+    public String deleteBlogTagByID = "DELETE FROM BlogToTag WHERE blogId = :id";
+
     @Autowired
     private HttpServletRequest request;
 
@@ -115,7 +116,7 @@ public class BlogRepository {
         String sql = getCommentsString;
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("blogID", blogID);
-        commentCallbackHandler callbackHandler = new commentCallbackHandler();
+        CommentCallbackHandler callbackHandler = new CommentCallbackHandler();
         jdbcTemplate.query(sql, parameterSource, callbackHandler);
         return callbackHandler.getComments();
     }
@@ -130,5 +131,32 @@ public class BlogRepository {
         parameterSource.addValue("commentBody", comment.getCommentBody());
         parameterSource.addValue("userID", comment.getCommentorID());
         jdbcTemplate.update(sql, parameterSource);
+    }
+
+    public Blog deleteBlogByID(String id)
+    {
+        String sql = getBlogByIDString;
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id);
+        ReadBlogCallbackHandler callbackHandler = new ReadBlogCallbackHandler();
+        jdbcTemplate.query(sql, parameterSource, callbackHandler);
+        Blog blog = callbackHandler.getBlog();
+
+
+
+        sql = deleteBlogTagByID;
+        parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id);
+        jdbcTemplate.update(sql,parameterSource);
+        sql = deleteBlogPermissionByID;
+        parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id);
+        jdbcTemplate.update(sql,parameterSource);
+        sql = deleteBlogByID;
+        parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id);
+        jdbcTemplate.update(sql,parameterSource);
+
+        return blog;
     }
 }
