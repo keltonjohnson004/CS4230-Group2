@@ -83,6 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     .antMatchers("/blog/readBlog/*").permitAll()
                     .antMatchers("/").permitAll()
                     .antMatchers("content/*").permitAll()
+                    .antMatchers("nav/base").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .exceptionHandling().accessDeniedPage("/user/login")

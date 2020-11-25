@@ -7,7 +7,6 @@ import edu.weber.group2.cms.blogPost.model.ReadBlog;
 import edu.weber.group2.cms.user.model.Permission;
 import edu.weber.group2.cms.user.model.Role;
 import edu.weber.group2.cms.user.model.User;
-import javafx.scene.control.Tab;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;

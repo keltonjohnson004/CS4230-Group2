@@ -2,26 +2,27 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:replace="~{nav/base :: head}">
     <meta charset="UTF-8">
     <title>HomePage</title>
-    <style>
-		div.post{
-		width: 100%;
-		border: 1px solid #000000;
-		word-wrap: break-word;
-
-		}
-	</style>
+    
 </head>
 <body>
 <main>
-
-    <div th:text="${blog.BlogName}"></div>
-    =======================================
-    <div th:text="${author.UserName}"></div>
-    ======================================
-    <div th:text = "${blog.BlogBody}"></div>
+	<nav th:replace="~{nav/base :: nav}"></nav>
+	<div class="jumbotron" style="text-align: center;">
+	  <h2 th:text="${blog.BlogName}"></h2>
+	  <h4 th:text="${author.UserName}"></h4>
+	</div>
+    
+    
+    <div class="container">
+    	<div class="row">
+    		<div class="col-sm-12">
+    			<div th:text = "${blog.BlogBody}"></div>
+   			</div>
+    	</div>
+    </div>
 
     <div th:switch="${userIsAuthor}">
         <p th:case=true><a th:href="@{../editBlog/{id}(id=${blog.Id})}">Edit</a></p>

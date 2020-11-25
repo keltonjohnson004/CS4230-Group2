@@ -55,6 +55,7 @@ public class MainPageController {
         }
         ModelAndView mv = new ModelAndView("index");
         mv.getModelMap().addAttribute("blogList", blogList );
+        mv.getModelMap().addAttribute("page_title", "home page");
         return mv;
     }
 }
