@@ -1,8 +1,5 @@
 package edu.weber.group2.cms.user.model;
 
-import java.util.HashMap;
-import java.time.ZonedDateTime;
-
 import org.junit.Test;
 import static org.junit.Assert.*;
 
