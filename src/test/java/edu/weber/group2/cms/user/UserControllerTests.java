@@ -2,7 +2,6 @@ package edu.weber.group2.cms.user;
 
 import edu.weber.group2.cms.user.model.User;
 import edu.weber.group2.cms.user.UserService;
-import edu.weber.group2.cms.user.repository.UserRepository;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -77,17 +76,18 @@ public class UserControllerTests {
 		//Model model = null;
 		//mockModel.addAttribute("user", user);
 		//mockUserController.postRegisterPage(user, mockBindingResult);
+			//assertEquals("user/register", mockUserController.postRegisterPage(user, mockBindingResult));	
 		try {
 			assertEquals("user/register", mockUserController.postRegisterPage(user, mockBindingResult));	
 		}
 		catch (Throwable e) {
-			if (mockUserController != null)
-				System.out.println("UserController NOT NULL!");
-			if (mockBindingResult != null)
-				System.out.println("Binding Result NOT NULL!");
-			if (user != null)
-				System.out.println("user NOT NULL!");
-			e.printStackTrace();
+			//if (mockUserController != null)
+			//	System.out.println("UserController NOT NULL!");
+			//if (mockBindingResult != null)
+			//	System.out.println("Binding Result NOT NULL!");
+			//if (user != null)
+			//	System.out.println("user NOT NULL!");
+			//e.printStackTrace();
 		}
 	}
 	*/

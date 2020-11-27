@@ -75,7 +75,7 @@ public class RoleTests {
 	}
 
 	@Test
-	public void getPermissionById_IncorrectValuesAsserFalse() {
+	public void getPermissionById_IncorrectValuesAssertFalse() {
 		
 		Permission permission = new Permission();
 		permission.setId(57);

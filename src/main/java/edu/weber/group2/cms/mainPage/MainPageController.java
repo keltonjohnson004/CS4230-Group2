@@ -59,12 +59,9 @@ public class MainPageController {
         }
         ModelAndView mv = new ModelAndView("index");
         mv.getModelMap().addAttribute("blogList", blogList );
-<<<<<<< HEAD
         mv.getModelMap().addAttribute("page_title", "home page");
-=======
         List<Tag> tagList = blogService.getAllTags();
         mv.getModelMap().addAttribute("tagList", tagList );
->>>>>>> 1472332ed8c4b1886281e40477911bfce04454f8
         return mv;
     }
 }
