@@ -2,7 +2,6 @@ package edu.weber.group2.cms.admin;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -40,6 +39,7 @@ public class AdminCallbackHandlerTests {
 		assertEquals("Morton", mockAdminCallbackHandler.getUserList().get(0).getFirstName()); 
 		assertEquals("Jensen", mockAdminCallbackHandler.getUserList().get(0).getLastName()); 
 		assertEquals("UserMorton", mockAdminCallbackHandler.getUserList().get(0).getUserName()); 
+		assertEquals(9215, mockAdminCallbackHandler.getUserList().get(0).getId()); 
 	}
 
 }
