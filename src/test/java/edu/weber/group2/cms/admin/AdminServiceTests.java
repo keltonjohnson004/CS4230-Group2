@@ -15,29 +15,29 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AdminRepositoryTests {
+public class AdminServiceTests {
 
 
 	@Mock
-	private AdminRepository mockAdminRepository;
+	private AdminService mockAdminService;
 
 
 	@Test
 	public void getAllUsers_ReturnsNotNull() {
 		List<User> users = new ArrayList<>();
 
-		when(mockAdminRepository.getAllUsers()).thenReturn(users);
+		when(mockAdminService.getAllUsers()).thenReturn(users);
 		
-		assertNotNull(mockAdminRepository.getAllUsers());
+		assertNotNull(mockAdminService.getAllUsers());
 	}
 
 	@Test
 	public void getAllRoles_ReturnsNotNull() {
 		List<Role> roles = new ArrayList<>();
 
-		when(mockAdminRepository.getAllRoles()).thenReturn(roles);
+		when(mockAdminService.getAllRoles()).thenReturn(roles);
 		
-		assertNotNull(mockAdminRepository.getAllRoles());
+		assertNotNull(mockAdminService.getAllRoles());
 	}
 
 }
