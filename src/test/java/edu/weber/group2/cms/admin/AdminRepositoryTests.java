@@ -23,9 +23,6 @@ public class AdminRepositoryTests {
 	@Mock
 	private AdminRepository mockAdminRepository;
 
-	@Mock
-	private AdminCallbackHandler mockAdminCallbackHandler;
-
 
 	@Test
 	public void getAllUsers_ReturnsNotNull() {
