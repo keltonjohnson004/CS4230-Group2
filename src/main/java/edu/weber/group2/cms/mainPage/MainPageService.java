@@ -4,10 +4,7 @@ import edu.weber.group2.cms.blogPost.model.ReadBlog;
 import edu.weber.group2.cms.user.model.Permission;
 import edu.weber.group2.cms.user.model.Role;
 import edu.weber.group2.cms.user.model.User;
-<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
-=======
->>>>>>> 1472332ed8c4b1886281e40477911bfce04454f8
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
