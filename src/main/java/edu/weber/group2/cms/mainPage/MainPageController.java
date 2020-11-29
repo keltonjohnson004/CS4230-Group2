@@ -49,19 +49,31 @@ public class MainPageController {
                                     @RequestParam(defaultValue = "10") Integer pageSize, Principal principal) {
 
 
-        List<ReadBlog> blogList = new ArrayList<ReadBlog>();
-        if(principal == null)
+        if(pageNo < 0)
         {
-            blogList = mainPageService.getAllBlogs(query,tag, pageNo, pageSize);
+            pageNo = 0;
         }
-        else {
-            blogList = mainPageService.getAllBlogs(query,tag, pageNo, pageSize, principal);
+        List<ReadBlog> blogList = new ArrayList<ReadBlog>();
+        while(blogList.size() == 0)
+        {
+            if(principal == null)
+            {
+                blogList = mainPageService.getAllBlogs(query,tag, pageNo, pageSize);
+            }
+            else {
+                blogList = mainPageService.getAllBlogs(query,tag, pageNo, pageSize, principal);
+            }
+            if(blogList.size() == 0) {
+                pageNo -= 1;
+            }
         }
         ModelAndView mv = new ModelAndView("index");
         mv.getModelMap().addAttribute("blogList", blogList );
         mv.getModelMap().addAttribute("page_title", "home page");
         List<Tag> tagList = blogService.getAllTags();
         mv.getModelMap().addAttribute("tagList", tagList );
+        mv.getModelMap().addAttribute("prevPage", pageNo - 1);
+        mv.getModelMap().addAttribute("nextPage", pageNo + 1);
         return mv;
     }
 }

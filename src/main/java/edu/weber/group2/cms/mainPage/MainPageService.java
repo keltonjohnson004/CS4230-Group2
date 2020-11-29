@@ -27,7 +27,7 @@ public class MainPageService {
     {
 
         User user = ((User)((UsernamePasswordAuthenticationToken) principal).getPrincipal());
-        List<ReadBlog> blogList = mainPageRepository.getAllBlogs(search,tag);
+        List<ReadBlog> blogList = mainPageRepository.getAllBlogs(search,tag,pageNo,pageSize);
         List<ReadBlog> returnBlogList = new ArrayList<>();
         List<Integer> permIds = new ArrayList<>();
 
@@ -67,7 +67,7 @@ public class MainPageService {
     public List<ReadBlog> getAllBlogs(String search, String tag, int pageNo, int pageSize)
     {
 
-        List<ReadBlog> blogList = mainPageRepository.getAllBlogs(search, tag);
+        List<ReadBlog> blogList = mainPageRepository.getAllBlogs(search, tag, pageNo, pageSize);
         List<ReadBlog> returnBlogList = new ArrayList<>();
         for (ReadBlog blog: blogList)
         {

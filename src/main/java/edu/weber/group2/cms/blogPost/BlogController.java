@@ -47,7 +47,7 @@ public class BlogController {
     public ModelAndView PostBlogPost(@ModelAttribute("NewBlogPost") Blog blog, BindingResult result, Principal principal)
     {
         blogService.addBlogPost(blog, principal);
-        ModelAndView mv = new ModelAndView("blog/blog");
+        ModelAndView mv = new ModelAndView("redirect:../");
         return mv;
     }
 

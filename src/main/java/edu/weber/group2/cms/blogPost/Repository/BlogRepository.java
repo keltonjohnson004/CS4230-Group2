@@ -76,7 +76,7 @@ public class BlogRepository {
         jdbcTemplate.query(sql, parameterSource, callbackHandler);
         List<Integer> test = callbackHandler.getblogList();
 
-        if(test.size() == 1)
+        if(test.size() != 0)
         {
             return test.get(0);
         }

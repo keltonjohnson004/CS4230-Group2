@@ -1,6 +1,8 @@
 package edu.weber.group2.cms.mainPage;
 
+import edu.weber.group2.cms.blogPost.Repository.TagRepository;
 import edu.weber.group2.cms.blogPost.model.ReadBlog;
+import edu.weber.group2.cms.blogPost.model.Tag;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,10 +16,12 @@ public class MainPageRepository
 
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
+    private final TagRepository tagRepository;
 
-    public MainPageRepository(NamedParameterJdbcTemplate jdbcTemplate)
+    public MainPageRepository(NamedParameterJdbcTemplate jdbcTemplate, TagRepository _tagRepository)
     {
         this.jdbcTemplate = jdbcTemplate;
+        tagRepository = _tagRepository;
     }
 
 
@@ -28,7 +32,7 @@ public class MainPageRepository
 
 
 
-    public List<ReadBlog> getAllBlogs(String search, String tag)
+    public List<ReadBlog> getAllBlogs(String search, String tag,int pageNo, int pageSize)
     {
         String sql = getAllBlogsString;
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -38,10 +42,23 @@ public class MainPageRepository
         }
         if(tag != null)
         {
+            List<Tag> allTags = tagRepository.getAllTags();
+            int tagId = 0;
+            for(Tag currTag: allTags)
+            {
+                if(currTag.getName().equals(tag))
+                {
+                    tagId = currTag.getId();
+                    break;
+                }
+            }
             sql = sql + "AND t.tagID = :tag";
-            parameterSource.addValue("tag", tag);
+            parameterSource.addValue("tag", tagId);
         }
 
+
+        int offset = pageNo * pageSize;
+        sql = sql + " LIMIT " + pageSize + " OFFSET " + offset;
 
         MainPageCallbackHandler callBackHandler = new MainPageCallbackHandler();
         jdbcTemplate.query(sql, parameterSource, callBackHandler);

@@ -86,6 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                     .antMatchers("/deleteBlogById").permitAll()
                     .antMatchers("/createBlog").permitAll()
                     .antMatchers("/updateBlog").permitAll()
+                    .antMatchers("/getBlogs").permitAll()
                     .antMatchers("/admin/**").hasAuthority("Can Edit Users")
                     .antMatchers("content/*").permitAll()
                     .antMatchers("nav/base").permitAll()

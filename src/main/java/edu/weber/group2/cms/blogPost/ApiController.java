@@ -15,11 +15,13 @@ import java.util.List;
 public class ApiController {
 
     private BlogService blogService;
+    private MainPageService mainPageService;
 
     @Autowired
-    public ApiController(BlogService _blogService)
+    public ApiController(BlogService _blogService, MainPageService _mainPageService)
     {
         blogService = _blogService;
+        mainPageService = _mainPageService;
     }
 
 
@@ -54,6 +56,7 @@ public class ApiController {
         if(!tag.equals("")) {
             List<String> tags = new ArrayList<>();
             tags.add(tag);
+            blog.setTags(tags);
         }
         else {
             blog.setTags(null);
@@ -76,7 +79,15 @@ public class ApiController {
         return blog;
     }
 
-
+    @RequestMapping(value="getBlogs", method=RequestMethod.GET)
+    public List<ReadBlog> getBlogs(@RequestParam("pageNo") int pageNo)
+    {
+        if(pageNo < 0)
+        {
+            pageNo = 0;
+        }
+        return mainPageService.getAllBlogs(null,null, pageNo, 10);
+    }
 
 
 
