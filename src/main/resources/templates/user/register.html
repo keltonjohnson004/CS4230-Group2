@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en">
-<head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{nav/base :: head}">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -8,29 +8,39 @@
     <title>Document</title>
 </head>
 <body>
-	<main>
-		<form method="post">
-			<table>
-				<tr>
-					<label>First Name</label> <input type="text" name="FirstName">
-					<div hidden="true">Invalid First Name</div><br>
-				</tr>
-				<tr>
-					<label>Last Name</label> <input type="text" name="LastName">
-					<div hidden="true">Invalid Last Name</div><br>
-				</tr>
-				<tr>
-					<label>Username</label> <input type="text" name="UserName">
-					 <div hidden="true">Invalid Username</div> <br>
-				</tr>
-				<tr>
-					<label>Password</label> <input type="password" name="Password">
-					<div hidden="true">Invalid Password</div><br>
-				</tr>
-				<tr>
-					<input type="submit">
-				</tr>
-			</table>
-		</form>
+	<main class="main-form">
+		<div class="container">
+			<div class="row">
+			<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+		        <div class="card card-signin my-5">
+		          <div class="card-body">
+		          <h5 class="card-title text-center">Create Account</h5>
+					<form method="post">
+						<div class="col-md-12">
+								<input type="text" name="FirstName" placeholder="First Name" class="form-control">
+								<div hidden="true">Invalid First Name</div><br>
+						</div>
+							<div class="col-md-12">
+								<input type="text" name="LastName" placeholder="Last Name" class="form-control">
+								<div hidden="true">Invalid Last Name</div><br>
+							</div>
+							<div class="col-md-12">
+								<input type="text" name="UserName" placeholder="Username" class="form-control">
+								 <div hidden="true">Invalid Username</div> <br>
+							</div>
+							<div class="col-md-12">
+								<input type="password" name="Password" placeholder="Password" class="form-control">
+								<div hidden="true">Invalid Password</div><br>
+							</div>
+							<div class="col-md-12">
+								<input type="submit" class="btn btn-lg btn-primary btn-block text-uppercase">
+							</div>
+						
+					</form>
+					</div>
+					</div>
+					</div>
+				</div>
+			</div>
 	</main>
 </body>

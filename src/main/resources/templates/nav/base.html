@@ -11,18 +11,18 @@
 </style>
 <body>
 	<ul class="nav navbar navbar-dark bg-dark" th:fragment="nav">
-	<a class="navbar-brand" href="#">GROUP 2 CS4230</a>
+	<a class="navbar-brand" th:href="@{~/}">GROUP 2 CS4230</a>
 	  <li class="nav-item">
-	    <a th:href="@{user/login}" class="nav-link">login</a>
+	    <a th:href="@{~/user/login}" class="nav-link">login</a>
 	  </li>
 	  <li class="nav-item">
-		<a th:href="@{user/register}" class="nav-link">register</a>
+		<a th:href="@{~/user/register}" class="nav-link">register</a>
 	  </li>
 	  <li class="nav-item">
-		<a th:href="@{blog/postBlog}" class="nav-link">post blog</a>
+		<a th:href="@{~/blog/postBlog}" class="nav-link">post blog</a>
 	  </li>
 	  <li class="nav-item">
-	  	<a th:href="@{admin}" class="nav-link">Admin</a>
+	  	<a th:href="@{~/admin}" class="nav-link">Admin</a>
 	  </li>
 	  <form th:action="@{/}" method="get">
 			<input type="text" name="query" id="query" th:value="*{query}" placeholder="Search Blog"/>
