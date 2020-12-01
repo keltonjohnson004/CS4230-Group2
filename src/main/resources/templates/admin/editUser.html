@@ -2,27 +2,39 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
+<head th:replace="~{nav/base :: head}">
     <meta charset="UTF-8">
     <title>HomePage</title>
 </head>
 <body>
-    <main>
-        <form method="post">
-            ID: <input type="text" th:value="${user.id}" id="id" name="id" readonly><br>
-            First Name: <input type="text" th:value="${user.firstName}" id="FirstName" name="FirstName" readonly><br>
-            Last Name: <input type="text" th:value="${user.lastName}" id="LastName" name="LastName" readonly><br>
-            User Name: <input type="text" th:value="${user.userName}" readonly><br>
-            Role:
-            <select name="Role" id="Role">
-                <option value="none" selected disabled hidden>Select an Role</option>
-                <div th:each="current:${roleList}">
-                    <option th:value="${current.id}"> <div th:text="${current.name}"></div></option>
-                </div>
-            </select> <br>
-            <input type="submit">
-            <a href="/admin">Cancel</a>
-        </form>
+	<main class="main-form">
+            <div class="container" style="margin-top:20px;">
+        		<div class="row">
+					<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+						<div class="card card-signin my-5">
+							<div class="card-body">
+							<h5 class="card-title text-center">Edit User</h5>
+						        <form method="post">
+						            <label>ID:</label><input type="text" th:value="${user.id}" id="id" name="id" readonly class="form-control"><br>
+						            <label>First Name:</label><input type="text" th:value="${user.firstName}" id="FirstName" name="FirstName" readonly class="form-control"><br>
+						            <label>Last Name:</label><input type="text" th:value="${user.lastName}" id="LastName" name="LastName" readonly class="form-control"><br>
+						            <label>User Name:</label><input type="text" th:value="${user.userName}" readonly class="form-control"><br>
+						            <label>Role:</label>
+						            <select name="Role" id="Role" class="form-control">
+						                <option value="none" selected disabled hidden>Select a Role</option>
+						                <div th:each="current:${roleList}">
+						                    <option th:value="${current.id}"> <div th:text="${current.name}"></div></option>
+						                </div>
+						            </select> <br>
+						            <input type="submit" class="btn btn-lg btn-primary btn-block text-uppercase"><br><br>
+						            <a href="/admin">Cancel</a>
+			                    </form>
+							            
+				            </div>
+			            </div>
+		            </div>
+	            </div>
+            </div>
     </main>
 </body>
 </html>

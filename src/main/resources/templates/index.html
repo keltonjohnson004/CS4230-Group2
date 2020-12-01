@@ -30,15 +30,15 @@
 							<hr>
 				
 			</div>
-			<div class="container text-center" style="text-align: center">
+			<div class="container text-center" style="text-align: center; margin-bottom: 20px;">
 				<div class="row">
-						<div class="col-md-4"></div>
-						<div class="col-md-4 text-center">
-							<ul class="pagination">
-								<li class="previous page-item"><a th:href="@{${pageNo}(pageNo=${prevPage})}" class="page-link">Previous Page</a></li>
-					    		<li class="next page-item"><a th:href="@{${pageNo}(pageNo=${nextPage})}" class="page-link">Next Page</a></li>
-							</ul>
-						</div>
+					<div class="col-md-3 pagination text-left">
+						<p class="previous page-item "><a th:href="@{${pageNo}(pageNo=${prevPage})}" class="page-link">Previous Page</a></p>
+					</div>
+					<div class="col-md-6"></div>
+					<div class="col-md-3 pagination">
+						<p class="next page-item text-right" style="text-align: right"><a th:href="@{${pageNo}(pageNo=${nextPage})}" class="page-link text-right">Next Page</a></p>
+					</div>
 				</div>
 			</div>
 			
