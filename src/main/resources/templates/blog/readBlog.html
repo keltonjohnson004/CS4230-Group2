@@ -61,20 +61,24 @@
 		    <div class="container">
 		    	<div class="row">
 		    	<div class="col-md-12">
-		    	
-          		<h6 class="card-title text-center">Leave a Comment</h6>
-				    <form method="post">
+
+
+					<form method="post">
 		                <div th:switch="${userCanComment}">
 		                    <p th:case=true>
-		                        
-				                <input hidden type="text" name="blogID" id="blogID" th:value="${blog.Id}" readonly/>
-				                <input hidden type="text" name="commentorID" id="commentorID" th:value="${user.Id}" readonly/>
-				                <textarea name="commentBody" id="commentBody"  cols="130" class="form-control"></textarea>
-				                
-		                    </p>
-		                    <input type="submit" class="btn btn-lg btn-primary btn-block text-uppercase " style="width: 200px;">
-		                </div>
-		            </form>
+
+
+
+
+									<input hidden type="text" name="blogID" id="blogID" th:value="${blog.Id}" readonly/>
+									<input hidden type="text" name="commentorID" id="commentorID" th:value="${user.Id}" readonly/>
+									<textarea name="commentBody" id="commentBody"  cols="130" class="form-control"></textarea>
+									<input type="submit" class="btn btn-lg btn-primary btn-block text-uppercase " style="width: 200px;">
+
+							</p>
+		                    </div>
+					</form>
+
 		            
 		            </div>
             	</div>
