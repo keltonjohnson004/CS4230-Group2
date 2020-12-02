@@ -65,6 +65,13 @@ public class UserRepository {
             + "WHERE 1=1";
 
 
+    private static final String ROLE_INSERT = "INSERT INTO UserToRole("
+            +"UserID,"
+            +"RoleID"
+            +")VALUES("
+            +":UserID,"
+            +":RoleID)";
+
 
 
     private static final String WHERE_USERNAME_EQUALS_USERNAME = "u.UserName = " + USERNAME_BINDING_KEY ;
@@ -133,6 +140,14 @@ public class UserRepository {
         }
 
         jdbcTemplate.update(USER_INSERT, parameters);
+
+        User tempUser = getUserByUserName(user.getUserName());
+        String sql = ROLE_INSERT;
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("UserID", tempUser.getId() );
+        parameterSource.addValue("RoleID", 1);
+        jdbcTemplate.update(sql, parameterSource);
+
     }
 
 
