@@ -2,7 +2,11 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
-
+<style>
+	.nav-link {
+		color: white !important;
+	}
+</style>
 	<script type="text/javascript">
 function setCookie(name, value, exdays) {
     var d, expires;
@@ -32,8 +36,15 @@ function setCookie(name, value, exdays) {
 <style>
 </style>
 <body>
-	<ul class="nav navbar navbar-dark bg-dark" th:fragment="nav">
-	<a class="navbar-brand" th:href="@{~/}">GROUP 2 CS4230</a>
+	<nav class="navbar navbar-expand-md navbar-dark bg-primary" th:fragment="nav">
+		<a class="navbar-brand" th:href="@{~/}">GROUP 2 CS4230</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+	    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  	  <div class="collapse navbar-collapse" id="basicExampleNav">
+	  
+	<ul class="navbar-nav mr-auto" >
 
 	  <li class="nav-item">
 		<a th:href="@{~/blog/postBlog}" sec:authorize="hasAuthority('Can Create Blogs')" class="nav-link">Create Blog</a>
@@ -48,23 +59,18 @@ function setCookie(name, value, exdays) {
 			<a th:href="@{~/user/register}" class="nav-link">Register</a>
 		</li>
 		<li class="nav-item" sec:authorize="isAuthenticated()">
-<<<<<<< HEAD
-			<input id="btnDelete" type="button" value="Logout">
+			<!-- <input id="btnDelete" type="button" value="Logout">
+		</li> -->
+			<a onclick="deleteCookie()" class="nav-link">Logout</a>
 		</li>
-=======
-			<button onclick="deleteCookie()"> Logout </button>
-	</li>
->>>>>>> 5c223bc637cf558349bedbb260c397485e8c3cbd
-	  <form th:action="@{/}" method="get">
-			<input type="text" name="query" id="query" th:value="*{query}" placeholder="Search Blog"/>
+	  	<form th:action="@{/}" method="get" class="form-inline">
+			<div class="md-form my-0"><input class="form-control mr-sm-2" type="text" name="query" id="query" th:value="*{query}" placeholder="Search Blog" style="border: 0 0 5px 0 black;"/></div>
 		</form>
-
 	</ul>
+		</div>
 	
+	</nav>
 </body>
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 5c223bc637cf558349bedbb260c397485e8c3cbd
 </html>
