@@ -5,7 +5,7 @@
 <head th:replace="~{nav/base :: head}">
     <meta charset="UTF-8">
     <title>HomePage</title>
-    
+
 </head>
 <body>
 <main>
@@ -25,7 +25,12 @@
     </div>
 
     <div th:switch="${userIsAuthor}">
-        <p th:case=true><a th:href="@{../editBlog/{id}(id=${blog.Id})}">Edit</a></p>
+        <p th:case=true>
+			<a th:href="@{../editBlog/{id}(id=${blog.Id})}">Edit</a>
+			<a th:href="@{../deleteBlog/{id}(id=${blog.Id})}">Delete</a>
+
+		</p>
+
     </div>
 
 
