@@ -34,7 +34,7 @@
 		</li>
 		<li class="nav-item" sec:authorize="isAuthenticated()">
 			<input id="btnDelete" type="button" value="Logout">
-	</li>
+		</li>
 	  <form th:action="@{/}" method="get">
 			<input type="text" name="query" id="query" th:value="*{query}" placeholder="Search Blog"/>
 		</form>
@@ -42,16 +42,4 @@
 	</ul>
 	
 </body>
-
-<script type="text/javascript">
-	$(function() {
-		$("$btnDelete").click(function() {
-			$.removeCookie("sessionId");
-			if($.cookie("sessionId") == null)
-			{
-				$("$lblCookie".html("");
-			}
-		});
-	});
-</script>
 </html>
