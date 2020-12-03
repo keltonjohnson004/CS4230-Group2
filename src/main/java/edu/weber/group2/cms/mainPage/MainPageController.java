@@ -56,6 +56,10 @@ public class MainPageController {
         List<ReadBlog> blogList = new ArrayList<ReadBlog>();
         while(blogList.size() == 0)
         {
+            if(pageNo < 0)
+            {
+                break;
+            }
             if(principal == null)
             {
                 blogList = mainPageService.getAllBlogs(query,tag, pageNo, pageSize);
@@ -66,6 +70,7 @@ public class MainPageController {
             if(blogList.size() == 0) {
                 pageNo -= 1;
             }
+
         }
         ModelAndView mv = new ModelAndView("index");
         mv.getModelMap().addAttribute("blogList", blogList );

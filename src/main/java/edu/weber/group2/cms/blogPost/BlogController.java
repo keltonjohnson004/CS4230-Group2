@@ -141,7 +141,15 @@ public class BlogController {
         return "redirect:/";
     }
 
+    @RequestMapping(value="deleteBlog/{blogID}", method=RequestMethod.GET)
+    public String GetdeleteBlog(@PathVariable("blogID") String blogID, Principal principal)
+    {
 
+        Blog blog = blogService.deleteBlogById(blogID);
+
+
+        return "redirect:/";
+    }
 
 
 }

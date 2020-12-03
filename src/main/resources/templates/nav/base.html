@@ -2,7 +2,22 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
-	
+
+	<script type="text/javascript">
+function setCookie(name, value, exdays) {
+    var d, expires;
+    exdays = exdays || 1;
+    d = new Date();
+    d.setTime(d.getTime() + (exdays));
+    expires = "expires=" + d.toUTCString();
+    document.cookie = name + "=" + value + "; " + expires;
+}
+
+		function deleteCookie(){
+		setCookie("sessionId","",-1);
+		document.location.reload();
+		}
+	</script>
     <meta charset="UTF-8">
     <title th:text="${page_title}">Default</title>
 
@@ -33,8 +48,13 @@
 			<a th:href="@{~/user/register}" class="nav-link">Register</a>
 		</li>
 		<li class="nav-item" sec:authorize="isAuthenticated()">
+<<<<<<< HEAD
 			<input id="btnDelete" type="button" value="Logout">
 		</li>
+=======
+			<button onclick="deleteCookie()"> Logout </button>
+	</li>
+>>>>>>> 5c223bc637cf558349bedbb260c397485e8c3cbd
 	  <form th:action="@{/}" method="get">
 			<input type="text" name="query" id="query" th:value="*{query}" placeholder="Search Blog"/>
 		</form>
@@ -42,4 +62,9 @@
 	</ul>
 	
 </body>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 5c223bc637cf558349bedbb260c397485e8c3cbd
 </html>
