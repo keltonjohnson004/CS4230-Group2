@@ -10,16 +10,38 @@
 </head>
 <body style="background-color:#ededed">
 <nav th:replace="~{nav/base :: nav}" ></nav>
-<main>
-
+<main class="main-form">
+<div class="container">
+	<div class="row">
+	<div class="col-md-12 mx-auto">
+	<div class="card card-signin my-5">
+	<div class="card-body">
+	<h5 class="card-title text-center">Edit Blog</h5>
+	
     <form method="post">
-        <p hidden><input type="text" name="id" id="id" th:value="${blog.Id}"/></p>
-        <p hidden><input type="text" name="authorID" id="authorID" th:value="${blog.authorID}"/></p>-->
-        Title: <input type="text" name="blogName" id="blogName" th:value="${blog.BlogName}"/><br>
-        Body: <br>
-        <textarea name="blogBody" id="blogBody" rows="30" cols="120" th:text="${blog.BlogBody}" ></textarea>
-        <input type="submit" value="Update">
+	    <div class="container">
+	    	<div class="row">
+		        <p hidden><input type="text" name="id" id="id" th:value="${blog.Id}"/></p>
+		        <p hidden><input type="text" name="authorID" id="authorID" th:value="${blog.authorID}"/></p>
+		        <div class="col-md-12" style="margin-bottom:10px;">
+		        	<h5>Title:</h5> <input type="text" name="blogName" id="blogName" th:value="${blog.BlogName}"/>
+		        </div>
+		        <div class="col-md-12">
+		        <h5>Body:</h5>
+		        <textarea name="blogBody" id="blogBody" rows="10" cols="130" th:text="${blog.BlogBody}" ></textarea>
+		        
+		        </div>
+		        <div class="col-md-4"></div>
+            		<div class="col-md-4 text-center" style="text-align: center">
+            		<input type="submit" value="Update" class="btn btn-lg btn-primary btn-block text-uppercase text-center" style="width: 200px;"></div>
+	        </div>
+        </div>
     </form>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 

@@ -13,6 +13,18 @@
 	<div class="jumbotron" style="text-align: center;">
 	  <h2 th:text="${blog.BlogName}"></h2>
 	  <h4 th:text="${author.UserName}"></h4>
+	  
+	  <div th:switch="${userIsAuthor}" class="text-center center">
+		  <ul class="pagination" th:case=true style="width: 200px; margin-right: auto;margin-left: auto; text-align: center !important;">
+		    <li class="page-item" style="text-align: center !important; margin-right: 20px;">
+				<a style="text-align: center !important;" class="page-link" th:href="@{../editBlog/{id}(id=${blog.Id})}">Edit</a> 
+		    </li>
+		    
+		    <li class="page-item" style="text-align: center !important;">
+				<a style="text-align: center !important;" class="page-link" th:href="@{../deleteBlog/{id}(id=${blog.Id})}">Delete</a>
+		    </li>
+		  </ul>
+    	</div>
 	</div>
     
     
@@ -24,15 +36,7 @@
     	</div>
     </div>
 
-    <div th:switch="${userIsAuthor}">
-        <p th:case=true>
-			<a th:href="@{../editBlog/{id}(id=${blog.Id})}">Edit</a>
-			<a th:href="@{../deleteBlog/{id}(id=${blog.Id})}">Delete</a>
-
-		</p>
-
-    </div>
-
+    
 
 
 <div class="container">
